@@ -2,7 +2,7 @@
  * Windows: Please do not use trailing comma as windows will fail with token error
  */
 
-const { series, rimraf, } = require('nps-utils');
+const { series } = require('nps-utils');
 
 module.exports = {
     scripts: {
@@ -69,57 +69,6 @@ module.exports = {
         lint: {
             script: tslint(`./src/**/*.ts`),
             hiddenFromHelp: true
-        },
-        /**
-         * Transpile your app into javascript
-         */
-        transpile: {
-            script: `tsc --project ./tsconfig.build.json`,
-            hiddenFromHelp: true
-        },
-        /**
-         * Clean files and folders
-         */
-        clean: {
-            default: {
-                script: series(
-                    `nps clean.dist`
-                ),
-                description: 'Deletes the ./dist folder'
-            },
-            dist: {
-                script: rimraf('./dist'),
-                hiddenFromHelp: true
-            },
-            tmp: {
-                script: rimraf('./.tmp'),
-                hiddenFromHelp: true
-            }
-        },
-        /**
-         * Copies static files to the build folder
-         */
-        copy: {
-            default: {
-                script: series(
-                    `nps copy.public`
-                ),
-                hiddenFromHelp: true
-            },
-            public: {
-                script: copy(
-                    './src/public/*',
-                    './dist'
-                ),
-                hiddenFromHelp: true
-            },
-            tmp: {
-                script: copyDir(
-                    './.tmp/src',
-                    './dist'
-                ),
-                hiddenFromHelp: true
-            }
         },
         /**
          * These run various kinds of tests. Default is unit.
@@ -206,18 +155,6 @@ module.exports = {
         }
     }
 };
-
-function copy(source, target) {
-    return `copyfiles --up 1 ${source} ${target}`;
-}
-
-function copyDir(source, target) {
-    return `ncp ${source} ${target}`;
-}
-
-function run(path) {
-    return `ts-node ${path}`;
-}
 
 function runFast(path) {
     return `ts-node --transpileOnly ${path}`;
