@@ -20,13 +20,11 @@ module.exports = {
         serve: {
             inspector: {
                 script: series(
-                    'nps banner.serve',
                     'nodemon --watch src --watch .env --inspect'
                 ),
                 description: 'Serves the current app and watches for changes to restart it, you may attach inspector to it.'
             },
             script: series(
-                'nps banner.serve',
                 'nodemon --watch src --watch .env'
             ),
             description: 'Serves the current app and watches for changes to restart it'
@@ -55,7 +53,6 @@ module.exports = {
          */
         build: {
             script: series(
-                'nps banner.build',
                 'nps config',
                 'nps lint',
                 'nps clean.dist',
@@ -86,7 +83,6 @@ module.exports = {
         clean: {
             default: {
                 script: series(
-                    `nps banner.clean`,
                     `nps clean.dist`
                 ),
                 description: 'Deletes the ./dist folder'
@@ -126,47 +122,6 @@ module.exports = {
             }
         },
         /**
-         * Database scripts
-         */
-        db: {
-            migrate: {
-                script: series(
-                    'nps banner.migrate',
-                    'nps config',
-                    runFast('./node_modules/typeorm/cli.js migration:run')
-                ),
-                description: 'Migrates the database to newest version available'
-            },
-            revert: {
-                script: series(
-                    'nps banner.revert',
-                    'nps config',
-                    runFast('./node_modules/typeorm/cli.js migration:revert')
-                ),
-                description: 'Downgrades the database'
-            },
-            seed: {
-                script: series(
-                    'nps banner.seed',
-                    'nps config',
-                    runFast('./commands/seed.ts')
-                ),
-                description: 'Seeds generated records into the database'
-            },
-            drop: {
-                script: runFast('./node_modules/typeorm/cli.js schema:drop'),
-                description: 'Drops the schema of the database'
-            },
-            setup: {
-                script: series(
-                    'nps db.drop',
-                    'nps db.migrate',
-                    'nps db.seed'
-                ),
-                description: 'Recreates the database with seeded data'
-            }
-        },
-        /**
          * These run various kinds of tests. Default is unit.
          */
         test: {
@@ -174,7 +129,6 @@ module.exports = {
             unit: {
                 default: {
                     script: series(
-                        'nps banner.testUnit',
                         'nps test.unit.pretest',
                         'nps test.unit.run'
                     ),
@@ -200,7 +154,6 @@ module.exports = {
             integration: {
                 default: {
                     script: series(
-                        'nps banner.testIntegration',
                         'nps test.integration.pretest',
                         'nps test.integration.run'
                     ),
@@ -227,7 +180,6 @@ module.exports = {
             e2e: {
                 default: {
                     script: series(
-                        'nps banner.testE2E',
                         'nps test.e2e.pretest',
                         'nps test.e2e.run'
                     ),
@@ -251,32 +203,9 @@ module.exports = {
                     hiddenFromHelp: true
                 }
             },
-        },
-        /**
-         * This creates pretty banner to the terminal
-         */
-        banner: {
-            build: banner('build'),
-            serve: banner('serve'),
-            testUnit: banner('test.unit'),
-            testIntegration: banner('test.integration'),
-            testE2E: banner('test.e2e'),
-            migrate: banner('migrate'),
-            seed: banner('seed'),
-            revert: banner('revert'),
-            clean: banner('clean')
         }
     }
 };
-
-function banner(name) {
-    return {
-        hiddenFromHelp: true,
-        silent: true,
-        description: `Shows ${name} banners to the console`,
-        script: runFast(`./commands/banner.ts ${name}`),
-    };
-}
 
 function copy(source, target) {
     return `copyfiles --up 1 ${source} ${target}`;

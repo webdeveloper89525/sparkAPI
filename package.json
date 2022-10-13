@@ -1,6 +1,6 @@
 {
-  "name": "express-typescript-boilerplate",
-  "version": "3.2.0",
+  "name": "sector5digital-api",
+  "version": "1.0.0",
   "description": "A delightful way to building a Node.js RESTful API Services with beautiful code written in TypeScript",
   "main": "src/app.ts",
   "scripts": {
@@ -13,30 +13,6 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
-  "keywords": [
-    "NodeJS",
-    "TypeScript",
-    "express",
-    "boilerplate",
-    "skeleton",
-    "starter-kit",
-    "w3tec.ch"
-  ],
-  "homepage": "https://github.com/w3tec/express-typescript-boilerplate#readme",
-  "author": "w3tec.ch <info@w3tec.ch>",
-  "contributors": [
-    {
-      "name": "David Weber",
-      "email": "david.weber@w3tec.ch",
-      "url": "https://github.com/dweber019"
-    },
-    {
-      "name": "Gery Hirschfeld",
-      "email": "gery.hirschfeld@w3tec.ch",
-      "url": "https://github.com/hirsch88"
-    }
-  ],
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "chalk": "^2.4.1",
@@ -83,24 +59,6 @@
     "uuid": "^3.3.2",
     "winston": "3.1.0"
   },
-  "resolutions": {
-    "**/event-stream": "^4.0.1"
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/test/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ],
-    "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "./test/unit/lib/setup.ts"
-  },
-  "license": "MIT",
   "devDependencies": {
     "@types/bcrypt": "^2.0.0",
     "@types/bcryptjs": "^2.4.2",
