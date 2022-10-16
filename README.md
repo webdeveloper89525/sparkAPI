@@ -22,6 +22,8 @@ Install a MySQL database.
 
 > If you work with a mac, we recommend to use homebrew for the installation.
 
+Create the new database `my_database` for testing.
+
 ### Step 2: Create new Project
 
 Fork or download this project. Configure your package.json for your new project.
