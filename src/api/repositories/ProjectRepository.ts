@@ -8,7 +8,7 @@ export class ProjectRepository extends Repository<Project> {
      * Find One project by project_id
      */
     public findByProjectId(id: string): Promise<any> {
-        const query = `SELECT * FROM project WHERE id = "${id}"`;
+        const query = `SELECT * FROM project WHERE id = "${id}" ORDER BY name ASC;`;
         const projects = projectMockService.getProject(query);
         return projects;
     }
