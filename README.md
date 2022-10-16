@@ -54,29 +54,6 @@ yarn start serve
 ![divider](./api-image.png)
 ![divider](./swagger-image.png)
 
-## ❯ Scripts and Tasks
-
-All script are defined in the `package-scripts.js` file, but the most important ones are listed here.
-
-### Install
-
-- Install all dependencies with `yarn install`
-
-### Linting
-
-- Run code quality analysis using `yarn start lint`. This runs tslint.
-- There is also a vscode task for this called `lint`.
-
-### Running in dev mode
-
-- Run `yarn start serve` to start nodemon with ts-node, to serve the app.
-- The server address will be displayed to you as `http://0.0.0.0:3000`
-
-### Building the project and run it
-
-- Run `yarn start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
-- To start the builded app located in `dist` use `yarn start`.
-
 ## ❯ API Routes
 
 The route prefix is `/api` by default, but you can change this in the .env file.
@@ -88,27 +65,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **/swagger**   | This is the Swagger UI with our API documentation |
 | **/monitor**   | Shows a small monitor page for the server |
 | **/api/project**  | Project entity endpoint |
-
-## ❯ Project Structure
-
-| Name                              | Description |
-| --------------------------------- | ----------- |
-| **.vscode/**                      | VSCode tasks, launch configuration and some other settings |
-| **dist/**                         | Compiled source files will be placed here |
-| **src/**                          | Source files |
-| **src/api/controllers/**          | REST API Controllers |
-| **src/api/controllers/requests**  | Request classes with validation rules if the body is not equal with a model |
-| **src/api/controllers/responses** | Response classes or interfaces to type json response bodies  |
-| **src/api/errors/**               | Custom HttpErrors like 404 NotFound |
-| **src/api/interceptors/**         | Interceptors are used to change or replace the data returned to the client. |
-| **src/api/middlewares/**          | Express Middlewares like helmet security features |
-| **src/api/models/**               | TypeORM Models |
-| **src/api/repositories/**         | Repository / DB layer |
-| **src/api/services/**             | Service layer |
-| **src/decorators/**               | Custom decorators like @Logger & @EventDispatch |
-| **src/loaders/**                  | Loader is a place where you can configure your app |
-| **src/public/**                   | Static assets (fonts, css, js, img). |
-| **src/types/** *.d.ts             | Custom type definitions and files that aren't on
 
 ## ❯ Swagger
 ```
