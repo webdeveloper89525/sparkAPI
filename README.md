@@ -1,4 +1,4 @@
-# ❯ Sector5Digital
+# ❯ Sector5Digital Testing API
 
 
 ## ❯ Getting Started
