@@ -32,13 +32,13 @@ export class ProjectService {
     public async createProject(project: Project): Promise<any> {
         this.log.info('Create the new project => ', project.toString());
         const newProject = await this.projectRepository.saveProject(project);
-        return newProject;
+        return this.changeProject(newProject);
     }
 
     public async updateProject(project: Project): Promise<any | undefined> {
         this.log.info('update the project => ', project.toString());
         const updatedProject = await this.projectRepository.saveProject(project);
-        return updatedProject;
+        return this.changeProject(updatedProject);
     }
 
     public async deleteProject(id: string): Promise<void> {
@@ -53,7 +53,7 @@ export class ProjectService {
             return {
                 ...project,
                 remainHours,
-                completPercent: Math.floor(remainHours / project.expectedHours * 100),
+                completPercent: Math.floor(project.usedHours / project.expectedHours * 100),
             };
         } else {
             return undefined;

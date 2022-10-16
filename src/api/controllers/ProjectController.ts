@@ -4,7 +4,7 @@ import { ProjectNotFountError } from '../errors/ProjectNotFoundError';
 import { Project } from '../models/Project';
 import { ProjectService } from '../services/ProjectService';
 import { ProjectRequest } from './requests/ProjectRequest';
-import { ProjectResponse } from './responses/ProjectResponse';
+import { ProjectDeleteResponse, ProjectResponse } from './responses/ProjectResponse';
 
 @JsonController('/project')
 @OpenAPI({ security: [{ basicAuth: [] }] })
@@ -29,7 +29,7 @@ export class ProjectController {
 
     @Post('/create')
     @ResponseSchema(ProjectResponse)
-    public createProject(@Body() body: ProjectRequest): Promise<ProjectResponse> {
+    public createProject(@Body({ required: true }) body: ProjectRequest): Promise<ProjectResponse> {
         let newProject = new Project();
         newProject = body as Project;
 
@@ -48,7 +48,8 @@ export class ProjectController {
     }
 
     @Delete('/:id')
-    public delete(@Param('id') id: string): Promise<void> {
-        return this.projectService.deleteProject(id);
+    public async delete(@Param('id') id: string): Promise<ProjectDeleteResponse> {
+        await this.projectService.deleteProject(id);
+        return {status: 'Successfully removed!'};
     }
 }

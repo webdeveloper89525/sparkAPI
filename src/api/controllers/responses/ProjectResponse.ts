@@ -21,3 +21,8 @@ export class ProjectResponse extends BaseProject {
     @IsNumber()
     public completPercent?: number;
 }
+
+export class ProjectDeleteResponse {
+    @IsString()
+    public status: string;
+}

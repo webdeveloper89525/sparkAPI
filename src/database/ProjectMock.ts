@@ -42,6 +42,26 @@ export class ProjectMock {
             }
         });
     }
+
+    public saveProject(query: string, project: Project): Promise<Project> {
+        return new Promise((resolve, rejects) => {
+            if (project) {
+                resolve(project);
+            } else {
+                resolve(project);
+            }
+        });
+    }
+
+    public deleteProject(query: string): Promise<any> {
+        return new Promise((resolve, rejects) => {
+            if (ProjectData) {
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        });
+    }
 }
 
 export const projectMockService = new ProjectMock();
