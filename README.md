@@ -52,6 +52,7 @@ yarn start serve
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
 ![divider](./api-image.png)
+![divider](./swagger-image.png)
 
 ## ❯ Scripts and Tasks
 
