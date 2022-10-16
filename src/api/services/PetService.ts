@@ -2,19 +2,16 @@ import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 import uuid from 'uuid';
 
-import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { Pet } from '../models/Pet';
 import { User } from '../models/User';
 import { PetRepository } from '../repositories/PetRepository';
-import { events } from '../subscribers/events';
 
 @Service()
 export class PetService {
 
     constructor(
         @OrmRepository() private petRepository: PetRepository,
-        @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
         @Logger(__filename) private log: LoggerInterface
     ) { }
 
@@ -41,7 +38,6 @@ export class PetService {
         this.log.info('Create a new pet => ', pet.toString());
         pet.id = uuid.v1();
         const newPet = await this.petRepository.save(pet);
-        this.eventDispatcher.dispatch(events.pet.created, newPet);
         return newPet;
     }
 
