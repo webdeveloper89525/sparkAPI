@@ -24,7 +24,7 @@ export class ProjectController {
     @OnUndefined(ProjectNotFountError)
     @ResponseSchema(ProjectResponse, {isArray: false})
     public findByProjectId(@Param('id') id: string): Promise<ProjectResponse> {
-        return this.projectService.findByNameSearch(id);
+        return this.projectService.findByProjectId(id);
     }
 
     @Post('/create')

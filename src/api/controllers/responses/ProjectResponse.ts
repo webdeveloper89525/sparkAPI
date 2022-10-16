@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsString, IsUUID } from 'class-validator';
+import {IsNumber, IsString, IsUUID } from 'class-validator';
 
 class BaseProject {
     @IsUUID()
@@ -18,6 +18,6 @@ export class ProjectResponse extends BaseProject {
     @IsNumber()
     public remainHours?: number;
 
-    @IsBoolean()
-    public completStatus?: boolean;
+    @IsNumber()
+    public completPercent?: number;
 }

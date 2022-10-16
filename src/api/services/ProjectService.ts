@@ -3,6 +3,7 @@ import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 import { Project } from '../models/Project';
 import { ProjectRepository } from '../repositories/ProjectRepository';
+import { ProjectResponse } from '../controllers/responses/ProjectResponse';
 
 @Service()
 export class ProjectService {
@@ -11,14 +12,16 @@ export class ProjectService {
         @Logger(__filename) private log: LoggerInterface
     ) { }
 
-    public findByProjectId(id: string): Promise<any | undefined> {
+    public async findByProjectId(id: string): Promise<any | undefined> {
         this.log.info('Find prject by project Id');
-        return this.projectRepository.findByProjectId(id);
+        const project = await this.projectRepository.findByProjectId(id);
+        return this.changeProject(project);
     }
 
-    public findAllProject(): Promise<any> {
+    public async findAllProject(): Promise<any> {
         this.log.info('Find all projects');
-        return this.projectRepository.findAllProjects();
+        const projects = await this.projectRepository.findAllProjects();
+        return projects.map((_project: Project) => this.changeProject(_project));
     }
 
     public findByNameSearch(name: string): Promise<any> {
@@ -42,5 +45,18 @@ export class ProjectService {
         this.log.info('Delete a project');
         await this.projectRepository.deleteProject(id);
         return;
+    }
+
+    public changeProject(project: Project): ProjectResponse {
+        if (project) {
+            const remainHours = project.expectedHours - project.usedHours;
+            return {
+                ...project,
+                remainHours,
+                completPercent: Math.floor(remainHours / project.expectedHours * 100),
+            };
+        } else {
+            return undefined;
+        }
     }
 }
