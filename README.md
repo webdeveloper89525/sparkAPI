@@ -110,3 +110,14 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/public/**                   | Static assets (fonts, css, js, img). |
 | **src/types/** *.d.ts             | Custom type definitions and files that aren't on
 
+## ❯ Swagger
+```
+Username: admin
+Password: 1234
+```
+
+## > Monitoring
+```
+Username: admin
+Password: 1234
+```
