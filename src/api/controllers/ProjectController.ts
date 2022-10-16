@@ -1,4 +1,4 @@
-import { Body, Get, JsonController, OnUndefined, Param, Post } from 'routing-controllers';
+import { Body, Delete, Get, JsonController, OnUndefined, Param, Post } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { ProjectNotFountError } from '../errors/ProjectNotFoundError';
 import { Project } from '../models/Project';
@@ -39,11 +39,16 @@ export class ProjectController {
     @Post('/update')
     @OnUndefined(ProjectNotFountError)
     @ResponseSchema(ProjectResponse)
-    public async updateProject(@Body() body: ProjectRequest): Promise<ProjectResponse> {
+    public async updateProject(@Body({ required: true }) body: ProjectRequest): Promise<ProjectResponse> {
 
         let project = new Project();
         project = body as Project;
 
         return this.projectService.updateProject(project);
+    }
+
+    @Delete('/:id')
+    public delete(@Param('id') id: string): Promise<void> {
+        return this.projectService.deleteProject(id);
     }
 }
