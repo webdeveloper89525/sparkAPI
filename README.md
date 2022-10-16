@@ -5,9 +5,9 @@
 
 - Install a MySQL database.
 
-- Create the new database `my_database`
-
 - Run MySQL server
+
+- Create the new database `my_database`
 
 - Run Project with `yarn start serve`
 
